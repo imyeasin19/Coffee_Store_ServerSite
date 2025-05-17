@@ -23,7 +23,14 @@ async function run() {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
 
+    const coffeesCollection = client.db('cooffeeDB').collection('coffees')
 
+    app.post('/coffees', async(req,res)=>{
+      const newCoffee = req.body;
+      console.log(newCoffee);
+      const result = await coffeesCollection.insertOne(newCoffee);
+      res.send(result);
+    })
 
 
 
